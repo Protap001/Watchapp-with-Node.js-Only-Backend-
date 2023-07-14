@@ -1,0 +1,12 @@
+<div class="list-group">
+    <a href="/watches" class="list-group-item list-group-item-action ">Butun kateqoriyalar</a>
+    <% categories.forEach(category => { %>
+        <a href="/watches/category/<%= category.url %>" 
+            class="list-group-item list-group-item-action <%= selectCategory == category.url ? 'active': '' %> ">
+            <%= category.name %>
+        </a>
+ <%   }); %>
+
+    
+    
+</div>

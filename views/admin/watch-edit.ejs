@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("../partials/head")  %> 
+</head>
+<body>
+    
+    <%- include("../partials/nav")  %> 
+
+    <div class="container mt-3">
+         <form method="post" enctype="multipart/form-data" action="/admin/watches/<%= watch.id %>?_csrf=<%= csrfToken %>">
+        <div class="row my-5 gx-5">
+           
+            <div class="col-md-10"> 
+                    <input type="hidden" name="watchid" value="<%= watch.id %>">
+                    <input type="hidden" name="sekil" value="<%= watch.sekil %>">
+                    <div class="row mb-3">
+                        <label for="basliq" class="col-sm-1 col-form-label">Başlıq</label>
+                        <div class="col-sm-11">
+                            <input type="text" class="form-control" id="basliq" name="basliq" value="<%= watch.basliq %>">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="altbasliq" class="col-sm-1 col-form-label">altbasliq</label>
+                        <div class="col-sm-11">
+                            <textarea name="altbasliq" class="form-control" rows="5"><%= watch.altbasliq %></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="altbasliq" class="col-sm-1 col-form-label">url</label>
+                        <div class="col-sm-11">
+                            <input type="text" class="form-control" id="url" name="url" value="<%= watch.url %>">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="aciqlama" class="col-sm-1 col-form-label">Aciqlama</label>
+                        <div class="col-sm-11">
+                            <textarea id="editor" name="aciqlama" class="form-control" rows="10"><%= watch.aciqlama %></textarea>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="sekil" class="col-sm-1 col-form-label">Sekil</label>
+                        <div class="col-sm-11">
+                            <img src="/static/images/<%= watch.sekil %> " alt="" width="120">
+                            <input type="file" class="form-control" id="sekil" name="sekil">
+                        </div>
+                    </div>                               
+                    <div class="row mb-3">
+                        <div class="col-sm-11 offset-sm-1">
+                          <button type="submit" class="btn btn-primary">Yadda Saxla</button>
+                        </div>
+                    </div>
+                
+            </div>
+            <div class="col-md-2">
+                <div class="row">                  
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="anasehife" name="anasehife" <%= watch.anasehife?"checked":"" %> />
+                        <label class="form-check-label" for="anasehife">
+                            Anasehife
+                        </label>
+                      </div>                   
+                </div>
+                <div class="row mb-3">                 
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="testiq" name="testiq" <%= watch.testiq?"checked":"" %> />
+                        <label class="form-check-label" for="testiq">
+                            Testiq
+                        </label>
+                      </div>                   
+                </div>
+
+                <div class="row border-top pt-3" style="color: rgb(255, 0, 0); font-weight: bold;">                     
+                   <% categories.forEach(category => { %>
+                     <div class="form-check">
+                        <input class="form-check-input"
+                         type="checkbox"
+                          id="category_<%= category.id %>"
+                           name="categories[]" 
+                           value="<%= category.id %>"
+                         <%= watch.categories.some(cat => cat.id == category.id) ? "checked": ""  %>/>     
+                      <label class="form-check-label" for="category_<%= category.id %>">
+                        <%= category.name %>
+                      </label>
+                     </div> 
+                    <% }) %>
+                                      
+              </div>
+
+
+            </div>
+        
+        </div>
+    </form>
+    </div>      
+    <%- include('../partials/script') %>
+</body>
+</html>
+
+
+
